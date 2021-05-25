@@ -33,9 +33,12 @@ app.get('/', (req, res) => {
     FIND MOVIE OR TV SERIES BY TITLE
     -----------------------------
 */
-app.get('/findMovie', (req, res) => {
+app.get('/findMovie/:title', (req, res) => {
+    var query  = {title:  new RegExp(req.params.title)};
+    console.log("the title is: " + query.title);
+
         //TODO read an text from user and added in title
-    db.collection('netflix_titles').find( {title:/^1/},{projection: {"director":1, "cast":1, "country":1, "release_year":1, _id:0} }).toArray()
+    db.collection('netflix_titles').find( query,{projection: {"director":1, "cast":1, "country":1, "release_year":1, _id:0} }).toArray()
     .then(results => {
       console.log(results)
     })
@@ -47,9 +50,10 @@ app.get('/findMovie', (req, res) => {
     NAME OF AN ARTIST
     -----------------------------
 */
-app.get('/findArtist', (req, res) => {
+app.get('/findArtist/:artist', (req, res) => {
+    var query =  { $text: { $search: req.params.artist} };
     //TODO read an text from user and added in artist
-db.collection('netflix_titles').find( { $text: { $search: "Bianca Comparato" } },{projection: {"title":1, _id:0} }).toArray()
+db.collection('netflix_titles').find(query,{projection: {"title":1, _id:0} }).toArray()
 .then(results => {
   console.log(results)
 })
@@ -73,10 +77,11 @@ db.collection('netflix_titles').count()
     TOTAL MOVIES OF A GIVEN COUNTRY
     -----------------------------
 */
-app.get('/countTotalCountry', (req, res) => {
+app.get('/countTotalCountry/:country', (req, res) => {
+    var query = {country: req.params.country , type:"Movie"};
     //TODO read an text from user and added in country
-db.collection('netflix_titles').find(
-    {country:"United States", type:"Movie"}).count()
+db.collection('netflix_titles').find(query
+    ).count()
 .then(results => {
   console.log(results)
 })
@@ -87,10 +92,11 @@ db.collection('netflix_titles').find(
     TOTAL SERIES OF A GIVEN YEAR
     -----------------------------
 */
-app.get('/countTotalYear', (req, res) => {
+app.get('/countTotalYear/:year', (req, res) => {
+    var query = {release_year: req.params.year, type:"TV Show"};
     //TODO read an text from user and added in country
-db.collection('netflix_titles').find(
-    {release_year:"2009", type:"TV Show"}).count()
+db.collection('netflix_titles').find(query
+    ).count()
 .then(results => {
   console.log(results)
 })
