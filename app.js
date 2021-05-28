@@ -34,7 +34,20 @@ app.get('/', (req, res) => {
     -----------------------------
 */
 app.get('/findMovie/:title', (req, res) => {
-    var query  = {title:  new RegExp(req.params.title)};
+    var query  = {title:  new RegExp(req.params.title), type: "Movie"};
+    console.log("the title is: " + query.title);
+
+        //TODO read an text from user and added in title
+    db.collection('netflix_titles').find( query,{projection: {"director":1, "cast":1, "country":1, "release_year":1, _id:0} }).toArray()
+    .then(results => {
+      console.log(results)
+    })
+    .catch(error => console.error(error))
+
+})
+
+app.get('/findTV/:title', (req, res) => {
+    var query  = {title:  new RegExp(req.params.title), type: "TV Show"};
     console.log("the title is: " + query.title);
 
         //TODO read an text from user and added in title
