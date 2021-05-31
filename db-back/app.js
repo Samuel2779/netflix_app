@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser= require('body-parser');
+const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient
 
 require('dotenv').config();
@@ -9,7 +10,8 @@ const port = process.env.PORT || 3000;
 
 var db;
 
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }))
+app.use(cors());
 
 const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.5f0qa.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`;
 
@@ -38,9 +40,10 @@ app.get('/findMovie/:title', (req, res) => {
     console.log("the title is: " + query.title);
 
         //TODO read an text from user and added in title
-    db.collection('netflix_titles').find( query,{projection: {"director":1, "cast":1, "country":1, "release_year":1, _id:0} }).toArray()
+    db.collection('netflix_titles').find( query,{projection: {"title":1,"director":1, "cast":1, "country":1, "release_year":1, _id:0} }).toArray()
     .then(results => {
       console.log(results)
+      res.send(results)
     })
     .catch(error => console.error(error))
 
@@ -51,9 +54,10 @@ app.get('/findTV/:title', (req, res) => {
     console.log("the title is: " + query.title);
 
         //TODO read an text from user and added in title
-    db.collection('netflix_titles').find( query,{projection: {"director":1, "cast":1, "country":1, "release_year":1, _id:0} }).toArray()
+    db.collection('netflix_titles').find( query,{projection: {"title":1,"director":1, "cast":1, "country":1, "release_year":1, _id:0} }).toArray()
     .then(results => {
       console.log(results)
+      res.send(results)
     })
     .catch(error => console.error(error))
 
@@ -69,6 +73,7 @@ app.get('/findArtist/:artist', (req, res) => {
 db.collection('netflix_titles').find(query,{projection: {"title":1, _id:0} }).toArray()
 .then(results => {
   console.log(results)
+  res.send(results)
 })
 .catch(error => console.error(error))
 
@@ -82,6 +87,7 @@ app.get('/countTotal', (req, res) => {
 db.collection('netflix_titles').count()
 .then(results => {
   console.log(results)
+  res.send({count : results})
 })
 .catch(error => console.error(error))
 
@@ -91,12 +97,13 @@ db.collection('netflix_titles').count()
     -----------------------------
 */
 app.get('/countTotalCountry/:country', (req, res) => {
-    var query = {country: req.params.country , type:"Movie"};
+    var query = {country: new RegExp(req.params.country) , type:"Movie"};
     //TODO read an text from user and added in country
 db.collection('netflix_titles').find(query
     ).count()
 .then(results => {
   console.log(results)
+  res.send({count : results})
 })
 .catch(error => console.error(error))
 
@@ -112,6 +119,7 @@ db.collection('netflix_titles').find(query
     ).count()
 .then(results => {
   console.log(results)
+  res.send({count : results})
 })
 .catch(error => console.error(error))
 
