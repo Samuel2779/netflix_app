@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "build": "cd db-back && npm install && cd ../db-front && npm install && npm run build",
-    "start": "npm run build && cd db-back && node app.js"
+    "start": "cd db-back && node app.js"
   },
   "repository": {
     "type": "git",
