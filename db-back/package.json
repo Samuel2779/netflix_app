@@ -9,6 +9,8 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Samuel2779/netflix_app.git"
+  },"engines": {
+    "node": "14.x"
   },
   "keywords": [],
   "author": "",
