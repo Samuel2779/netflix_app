@@ -81,6 +81,7 @@ db.collection('netflix_titles').find(query,{projection: {"title":1, _id:0} }).to
 */
 app.get('/countTotal', (req, res) => {
     //TODO add button functionality to activate
+    console.log(uri);
 db.collection('netflix_titles').count()
 .then(results => {
   console.log(results)
