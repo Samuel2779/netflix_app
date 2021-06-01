@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "cd db-back && npm install && cd ../db-front && npm install && npm build",
+    "start": "cd db-back && node app.js"
   },
   "repository": {
     "type": "git",

@@ -3,6 +3,7 @@ const app = express();
 const bodyParser= require('body-parser');
 const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient
+const path = require('path');
 
 require('dotenv').config();
 
@@ -27,10 +28,6 @@ MongoClient.connect(uri,
 
    
 
-app.get('/', (req, res) => {
-    res.send('Express try')
-
-})
 /*  -----------------------------
     FIND MOVIE OR TV SERIES BY TITLE
     -----------------------------
@@ -125,6 +122,11 @@ db.collection('netflix_titles').find(query
 
 })
 
+app.use(express.static(path.join(__dirname ,"../db-front" ,'build')));
+
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname,"../db-front" , 'build', 'index.html'));
+  });
 
 app.listen(port, () => {
     console.log('Server up and running', port)
