@@ -192,9 +192,9 @@ const SearchScreen = () => {
 
     const body = (
         <div className={classes.paper}>
-            <h2 id="simple-modal-title" style={{color: 'white'}}>{category==="countTotalYear" && "Año: "}{category==="countTotalCountry" && "País: "}{search}</h2>
-            <h2 style={{color: 'white'}}>Peliculas: {movies.count}</h2>
-            <Button onClick={() => { handleClose();}} variant="contained" color="secondary" >Cerrar</Button>
+            <h2 id="simple-modal-title" style={{color: 'white'}}>{category==="countTotalYear" && "Year: "}{category==="countTotalCountry" && "Country: "}{search}</h2>
+            <h2 style={{color: 'white'}}>Movies: {movies.count}</h2>
+            <Button onClick={() => { handleClose();}} variant="contained" color="secondary" >Close</Button>
         </div>
     );
 
@@ -288,7 +288,7 @@ const SearchScreen = () => {
             >
                 {body}
             </Modal>
-            <h2 style={{color: 'white'}}>Número total de peliculas: {count}</h2>
+            <h2 style={{color: 'white'}}>Total number of movies: {count}</h2>
             </ThemeProvider>
             
             
