@@ -144,7 +144,7 @@ const SearchScreen = () => {
     };
 
     React.useEffect(() => {
-        fetch(`http://localhost:3000/countTotal`).then(response => {
+        fetch(`/countTotal`).then(response => {
     
             return (
                 response.json()            
@@ -177,7 +177,7 @@ const SearchScreen = () => {
     ];
 
     const searchFunc = () =>{
-        fetch(`http://localhost:3000/${category}/${encodeURIComponent(search)}`)
+        fetch(`/${category}/${encodeURIComponent(search)}`)
         .then(response => {
     
                 return (
