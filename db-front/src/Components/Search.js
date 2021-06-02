@@ -242,10 +242,10 @@ const SearchScreen = () => {
                                     {(category==="findMovie" || category==="findTV")  && 
                                         <TableRow>
                                             <TableCell style={{fontWeight: 'bold'}}>Title</TableCell>
-                                            <TableCell align="right" style={{fontWeight: 'bold'}}>Director</TableCell>
-                                            <TableCell align="right" style={{fontWeight: 'bold'}}>Cast</TableCell>
-                                            <TableCell align="right" style={{fontWeight: 'bold'}}>Country</TableCell>
-                                            <TableCell align="right" style={{fontWeight: 'bold'}}>Release Year</TableCell>
+                                            <TableCell align="center" style={{fontWeight: 'bold'}}>Director</TableCell>
+                                            <TableCell align="center" style={{fontWeight: 'bold'}}>Cast</TableCell>
+                                            <TableCell align="center" style={{fontWeight: 'bold'}}>Country</TableCell>
+                                            <TableCell align="center" style={{fontWeight: 'bold'}}>Release Year</TableCell>
                                         </TableRow> 
                                     }
                                     {(category==="findArtist")  && 
@@ -261,10 +261,10 @@ const SearchScreen = () => {
                                     <TableCell component="th" scope="row">
                                         {row.title}
                                     </TableCell>
-                                    <TableCell align="right">{row.director}</TableCell>
-                                    <TableCell align="right">{row.cast}</TableCell>
-                                    <TableCell align="right">{row.country}</TableCell>
-                                    <TableCell align="right">{row.release_year}</TableCell>
+                                    <TableCell align="center">{row.director}</TableCell>
+                                    <TableCell align="center">{row.cast}</TableCell>
+                                    <TableCell align="center">{row.country}</TableCell>
+                                    <TableCell align="center">{row.release_year}</TableCell>
                                     </TableRow>
                                 ))}
                                 {category==="findArtist" && 
