@@ -65,7 +65,8 @@ app.get('/findTV/:title', (req, res) => {
     -----------------------------
 */
 app.get('/findArtist/:artist', (req, res) => {
-    var query =  { $text: { $search: req.params.artist} };
+    var artist = "\"" + req.params.artist + "\"";
+    var query =  { $text: { $search: artist } };
     //TODO read an text from user and added in artist
 db.collection('netflix_titles').find(query,{projection: {"title":1, _id:0} }).toArray()
 .then(results => {
